@@ -1,4 +1,7 @@
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 class ContactHelper:
     def __init__(self, app):
@@ -79,4 +82,18 @@ class ContactHelper:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         # submit contact
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-        self.app.return_to_home_page()
+        # self.app.return_to_home_page()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value = 'Delete']").click()
+        # self.return_to_home_page()
+        WebDriverWait(wd, 10).until(EC.alert_is_present())
+        wd.switch_to.alert.accept()
+
+    # def return_to_home_page(self):
+    #     wd = self.app.wd
+    #     wd.find_element_by_link_text("home page").click()
