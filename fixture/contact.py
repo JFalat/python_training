@@ -94,6 +94,15 @@ class ContactHelper:
         WebDriverWait(wd, 10).until(EC.alert_is_present())
         wd.switch_to.alert.accept()
 
-    # def return_to_home_page(self):
-    #     wd = self.app.wd
-    #     wd.find_element_by_link_text("home page").click()
+    def modify_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # click edit contact
+        # wd.find_element_by_xpath("//img[@src='{}'.format('pencil')").click()
+        wd.find_element_by_css_selector("img[alt='Edit']").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys("lala")
+        # submit update
+        wd.find_element_by_name("update").click()
