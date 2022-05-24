@@ -1,3 +1,4 @@
+from selenium.webdriver.android.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,7 +19,7 @@ class ContactHelper:
         wd = self.app.wd
         if text is not None:
             wd.find_element_by_name(field_name).click()
-            wd.find_element_by_name(field_name).clear()
+            # wd.find_element_by_name(field_name).clear()
             Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
 
     def fill_contact_form(self, contact):
@@ -39,10 +40,10 @@ class ContactHelper:
             self.change_field_value("email3", contact.email3)
             self.change_field_value("homepage", contact.homepage)
             self.change_field_value2("bday",contact.bday)
-            self.change_field_value2("bmonth", contact.bday)
+            self.change_field_value2("bmonth", contact.bmonth)
             self.change_field_value("byear", contact.byear)
-            self.change_field_value2("aday", contact.bday)
-            self.change_field_value2("amonth", contact.bday)
+            self.change_field_value2("aday", contact.aday)
+            self.change_field_value2("amonth", contact.amonth)
             self.change_field_value("ayear", contact.ayear)
             self.change_field_value("address2", contact.address2)
             self.change_field_value("phone2", contact.phone2)
@@ -54,8 +55,8 @@ class ContactHelper:
         wd.find_element_by_link_text("add new").click()
         self.fill_contact_form(contact)
         # submit contact
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-        self.app.return_to_home_page()
+        wd.find_element_by_name("submit").click()
+        self.go_to_home_page()
 
     def delete_first_contact(self):
         wd = self.app.wd
