@@ -55,7 +55,7 @@ class ContactHelper:
         self.fill_contact_form(contact)
         # submit contact
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-        # self.app.return_to_home_page()
+        self.app.return_to_home_page()
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -82,7 +82,8 @@ class ContactHelper:
 
     def go_to_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("/addressbook.php") and len(wd.find_elements_by_name("searchstring")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def count(self):
         wd = self.app.wd
