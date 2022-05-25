@@ -2,6 +2,7 @@ from selenium.webdriver.android.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from model.contact import Contact
 
 
 class ContactHelper:
@@ -90,3 +91,13 @@ class ContactHelper:
         wd = self.app.wd
         self.go_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.go_to_home_page()
+        for element in wd.find_element_by_css_selector("class.entry"):
+            contacts = []
+            text = element.element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(firstname=text, middlename=text, id=id))
+        return contacts
