@@ -92,6 +92,7 @@ class ContactHelper:
         self.go_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+
     def get_contact_list(self):
         wd = self.app.wd
         self.go_to_home_page()
