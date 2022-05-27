@@ -57,7 +57,7 @@ class ContactHelper:
         self.fill_contact_form(contact)
         # submit contact
         wd.find_element_by_name("submit").click()
-        self.go_to_home_page()
+        # self.go_to_home_page()
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -67,6 +67,7 @@ class ContactHelper:
         # self.return_to_home_page()
         WebDriverWait(wd, 10).until(EC.alert_is_present())
         wd.switch_to.alert.accept()
+        self.return_to_home_page()
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -96,9 +97,9 @@ class ContactHelper:
     def get_contact_list(self):
         wd = self.app.wd
         self.go_to_home_page()
-        for element in wd.find_element_by_css_selector("class.entry"):
+        for element in wd.find_elements_by_name("entry"):
             contacts = []
-            text = element.element.text
+            text = element.text
             id = element.find_element_by_name("selected[]").get_attribute("value")
             contacts.append(Contact(firstname=text, middlename=text, id=id))
         return contacts
