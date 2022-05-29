@@ -7,6 +7,7 @@ from model.contact import Contact
 
 class ContactHelper:
     def __init__(self, app):
+        self.wd = None
         self.app = app
 
     def change_field_value(self, field_name, text):
@@ -58,6 +59,7 @@ class ContactHelper:
         # submit contact
         wd.find_element_by_name("submit").click()
         # self.go_to_home_page()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -67,7 +69,8 @@ class ContactHelper:
         # self.return_to_home_page()
         WebDriverWait(wd, 10).until(EC.alert_is_present())
         wd.switch_to.alert.accept()
-        self.return_to_home_page()
+        # self.return_to_home_page()
+        self.contact_cache = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -82,6 +85,7 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         # submit update
         wd.find_element_by_name("update").click()
+        self.contact_cache = None
 
     def go_to_home_page(self):
         wd = self.app.wd
@@ -94,14 +98,16 @@ class ContactHelper:
         return len(wd.find_elements_by_name("selected[]"))
 
     contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.go_to_home_page()
-        contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            cells = element.find_elements_by_tag_name("td")
-            firstnameCell=cells[2].text
-            middlenameCell=cells[1].text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(firstname=firstnameCell, middlename=middlenameCell, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.go_to_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                cells = element.find_elements_by_tag_name("td")
+                firstnameCell=cells[2].text
+                middlenameCell=cells[1].text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(firstname=firstnameCell, middlename=middlenameCell, id=id))
+        return list(self.contact_cache)
