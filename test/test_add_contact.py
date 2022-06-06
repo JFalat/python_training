@@ -5,15 +5,15 @@ import random
 import string
 
 def random_string(prefix,maxlen):
-    symbols = string.ascii_letters + string.digits+string.punctuation
+    symbols = string.ascii_letters + string.digits+string.punctuation + "" * 10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-testdata = [Contact(firstname="", middlename="", lastname="", nickname="", title="", company="", address="",
+testdata = [Contact(firstname="", middlename="", lastname="", nickname="", title="", company=""
             # homephone= "", mobilephone="", workphone="", fax="", email="", email2="", email3="",
             # homepage="", bday="", bmonth="", byear="", aday="", amonth="", ayear="", address2="", phone2="", notes=""
                     )] + [
-            Contact(firstname=random_string("firstname", 20), middlename=random_string("middlename", 20), lastname=random_string("lastname",20),
-            nickname=random_string("nickname",10), title=random_string("title",5), company=random_string("company",7), address=random_string("address",7))
+            Contact(firstname=random_string("firstname", 20), middlename=random_string("middlename", 20), lastname=random_string("lastname", 20),
+            nickname=random_string("nickname", 10), title=random_string("title", 5), company=random_string("company", 7))
             #         ,
             # homephone= random_string("homephone",10), mobilephone=random_string("mobilephone",10), workphone=random_string("workphone",10),
             # fax=random_string("fax",10), email=random_string("email",10), email2=random_string("email2",10), email3=random_string("email3",10),
