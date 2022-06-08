@@ -122,7 +122,7 @@ class ContactHelper:
                 all_email = cells[4].text
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id, address=address,
                                                   all_phones_from_home_page = all_phones, all_email_from_home_page = all_email))
-            return list(self.contact_cache)
+        return list(self.contact_cache)
 
     def select_contact_by_index(self, index):
         wd = self.app.wd
