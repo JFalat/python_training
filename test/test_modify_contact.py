@@ -3,10 +3,10 @@ from random import randrange
 
 def test_modify_first_name(app):
     if app.contact.count() == 0:
-        app.contact.create(Contact(firstname="test"))
+        app.contact.create(Contact(firstname="rwerwer"))
         old_contacts = app.contact.get_contact_list()
         index = randrange(len(old_contacts))
-        contacts = Contact(firstname="test")
+        contacts = Contact(firstname="rwerwer")
         contacts.id = old_contacts[index].id
         app.group.modify_contact_by_index(index, contacts)
         new_contact = app.contact.get_contact_list()
@@ -16,12 +16,12 @@ def test_modify_first_name(app):
 #
 # def test_modify_middlename(app):
 #     if app.contact.count() == 0:
-#         app.contact.create(Contact(firstname="test"))
+#         app.contact.create(Contact(firstname="rwerwer"))
 #     app.contact.modify_first_contact(Contact(middlename="Middle contact"))
 #
 # def test_modify_titlw(app):
 #     if app.contact.count() == 0:
-#         app.contact.create(Contact(firstname="test"))
+#         app.contact.create(Contact(firstname="rwerwer"))
 #     app.contact.modify_first_contact(Contact(title="title"))
 
 #

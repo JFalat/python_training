@@ -3,10 +3,10 @@ from random import randrange
 
 def test_modify_first_name(app):
     if app.group.count() == 0:
-        app.group.create(Group(name="test"))
+        app.group.create(Group(name="rwerwer"))
     old_groups = app.group.get_group_list()
     index = randrange(len(old_groups))
-    group = Group(name="test")
+    group = Group(name="rwerwer")
     group.id = old_groups[index].id
     app.group.modify_group_by_index(index, group)
     new_groups = app.group.get_group_list()
