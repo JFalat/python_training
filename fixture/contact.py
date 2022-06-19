@@ -86,10 +86,8 @@ class ContactHelper:
         self.select_contact_by_id(id)
         # submit deletion
         wd.find_element_by_xpath("//input[@value = 'Delete']").click()
-        # self.return_to_home_page()
-        WebDriverWait(wd, 10).until(EC.alert_is_present())
         wd.switch_to.alert.accept()
-        # self.return_to_home_page()
+        wd.find_element_by_css_selector("div.msgbox").click()
         self.contact_cache = None
 
     def select_first_contact(self):
@@ -109,6 +107,17 @@ class ContactHelper:
         wd.find_element_by_css_selector("img[alt='Edit']").click()
         self.fill_contact_form(new_contact_data)
         # submit update
+        wd.find_element_by_name("update").click()
+        self.contact_cache = None
+
+    def modify_contact_by_id(self, id, new_contact_data):
+        wd = self.app.wd
+            # select first contact
+        self.select_contact_by_id(id)
+            # click edit contact
+        wd.find_element_by_css_selector("img[alt='Edit']").click()
+        self.fill_contact_form(new_contact_data)
+            # submit update
         wd.find_element_by_name("update").click()
         self.contact_cache = None
 
