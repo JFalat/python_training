@@ -1,7 +1,10 @@
+from typing import Union, Any
+
 import mysql.connector
 import pymysql.cursors
 from fixture.db import DbFixture
 from fixture.orm import ORMFixture
+from model.group import Group
 
 db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
 
@@ -28,4 +31,3 @@ finally:
 #     print(len(contacts))
 # finally:
 #     db.destroy()
-
