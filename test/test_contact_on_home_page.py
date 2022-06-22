@@ -6,7 +6,7 @@ from fixture.orm import ORMFixture
 orm = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
 db = Database()
 
-def test_add_contact(app, db, json_contacts, check_ui):
+def test_add_contact(app, db, orm, check_ui):
         # contacts = json_contacts
         old_contacts = db.get_contact_list()
         # assert len(old_contacts) + 1 == app.contact.count()
